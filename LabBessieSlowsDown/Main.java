@@ -1,0 +1,116 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
+        int time = 0;
+        int distance = 1000;
+        int speedModifier = 1;
+
+        ArrayList<Event> array = new ArrayList<>();
+        for(int i = 0; i < N; i++) {
+            array.add(new Event(input.next().charAt(0), input.nextInt())); 
+        }
+        
+        /*
+        for(Event i : array) {
+            if(i.type == 'T') {
+                distance -= speedModifier/i.time;
+                time += i.time;
+            }
+            if(i.type == 'D') {
+                distance -= i.value;
+                time += i.time;
+            }
+            
+            for(Event j : array) {
+                j.updateTime(speedModifier);
+            }
+            sortEvents(array);
+        }
+        */
+        int min = 0; 
+        int minIndex = 0;
+        for(int j = 0; j < N; j++) {
+                for(int i = 0; i < N; i++) {
+                    if(array.get(i).type == 'T') {
+                        min = array.get(i).time < min ? array.get(i).time : min;
+                        minIndex = i;
+                    } 
+                    else { 
+                        min = array.get(i).value * speedModifier < min ? array.get(i).value : min;
+                        minIndex = i;
+                    }
+                }
+
+                if(array.get(minIndex).type == 'T') {
+                    distance -= speedModifier/ array.get(minIndex).time;
+                    time += array.get(minIndex).time;
+                }
+                else {
+                    
+                    distance -= array.get(minIndex).value;
+                    time += array.get(minIndex).time;
+                }
+
+                speedModifier++;
+                for(Event e : array) {
+                    e.updateTime(speedModifier);
+                }
+
+        }
+
+
+        time += speedModifier * distance;
+
+        System.out.println(time); 
+
+        
+
+
+        
+    }
+
+    static void sortEvents(ArrayList<Event> array) {
+        for(int i = 0; i < array.size(); i++) {
+            int min = array.get(i).time;
+            int minIndex = i;
+            for(int j = i; j <array.size(); j++) {
+                if(array.get(j).time < min) {
+                    min = array.get(j).time;
+                    minIndex = j;
+                }
+                Event temp = array.get(i);
+                array.set(i, array.get(minIndex));
+                array.set(minIndex, temp);
+            } 
+        }
+    }
+
+    public static class Event {
+        public char type;
+        public int value;
+        public int time;
+        
+        
+        public Event(char a, int b) {
+            if(a == 'T') {
+                type = 'T';
+                time = b;
+            }
+            else {
+                type = 'D';
+                time = b;
+                value = b;
+            }
+
+        }
+
+        public void updateTime(int speed) {
+            if(type == 'D') {
+                this.time = value * speed; 
+            }
+        } 
+    }
+}
+

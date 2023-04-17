@@ -1,0 +1,151 @@
+/*
+     CIST 004B1 Fall 2022
+     HW week 2 problem 4
+     Description: Calculates sine and cosine using recursion, compares methods with java.lang.Math Library.     
+     Input: none.
+     Output:  String
+     Student: Benyamin Ha
+     Known bugs: none.
+     Date: 02.11.2023
+*/
+
+
+import java.lang.Math;
+
+public class SinCosCalc{
+    public static void main(String[] args) {
+        double testNum;
+        for(double i = 0; i <= 10;i++) {
+            testNum = i/10;
+            System.out.println("Sin(" + testNum + ")");
+            System.out.println("Math.sin  =  " + Math.sin(testNum));
+            System.out.println("My method =  " + s(testNum));
+            System.out.println();
+            System.out.println("Cos(" + testNum + ")");
+            System.out.println("Math.cos  =  " + Math.cos(testNum));
+            System.out.println("My method =  " + c(testNum));
+            System.out.println();
+            System.out.println("-----------------------------------------------------");
+               
+
+        }    
+        
+    }
+    public static double s(double x) { 
+        if(-0.005 < x || x <0.005) {
+            return x - (x*x*x)/3;       
+        }  
+        else {
+            return 2 * s(x/2) * c(x/2);
+        }
+    }
+
+    public static double c(double x) {
+        if(-0.005 < x || x <0.005) {
+            return 1 - (x * x)/2;
+        }   
+        else {
+            return 1 - 2 * (s(x/2)) * (s(x/2));
+        }
+    }        
+} 
+// Sin(0.0)
+// Math.sin  =  0.0
+// My method =  0.0
+// 
+// Cos(0.0)
+// Math.cos  =  1.0
+// My method =  1.0
+// 
+// -----------------------------------------------------
+// Sin(0.1)
+// Math.sin  =  0.09983341664682815
+// My method =  0.09966666666666667
+// 
+// Cos(0.1)
+// Math.cos  =  0.9950041652780258
+// My method =  0.995
+// 
+// -----------------------------------------------------
+// Sin(0.2)
+// Math.sin  =  0.19866933079506122
+// My method =  0.19733333333333333
+// 
+// Cos(0.2)
+// Math.cos  =  0.9800665778412416
+// My method =  0.98
+// 
+// -----------------------------------------------------
+// Sin(0.3)
+// Math.sin  =  0.29552020666133955
+// My method =  0.291
+// 
+// Cos(0.3)
+// Math.cos  =  0.955336489125606
+// My method =  0.955
+// 
+// -----------------------------------------------------
+// Sin(0.4)
+// Math.sin  =  0.3894183423086505
+// My method =  0.3786666666666667
+// 
+// Cos(0.4)
+// Math.cos  =  0.9210609940028851
+// My method =  0.9199999999999999
+// 
+// -----------------------------------------------------
+// Sin(0.5)
+// Math.sin  =  0.479425538604203
+// My method =  0.4583333333333333
+// 
+// Cos(0.5)
+// Math.cos  =  0.8775825618903728
+// My method =  0.875
+// 
+// -----------------------------------------------------
+// Sin(0.6)
+// Math.sin  =  0.5646424733950354
+// My method =  0.528
+// 
+// Cos(0.6)
+// Math.cos  =  0.8253356149096783
+// My method =  0.8200000000000001
+// 
+// -----------------------------------------------------
+// Sin(0.7)
+// Math.sin  =  0.644217687237691
+// My method =  0.5856666666666667
+// 
+// Cos(0.7)
+// Math.cos  =  0.7648421872844885
+// My method =  0.755
+// 
+// -----------------------------------------------------
+// Sin(0.8)
+// Math.sin  =  0.7173560908995228
+// My method =  0.6293333333333333
+// 
+// Cos(0.8)
+// Math.cos  =  0.6967067093471654
+// My method =  0.6799999999999999
+// 
+// -----------------------------------------------------
+// Sin(0.9)
+// Math.sin  =  0.7833269096274834
+// My method =  0.657
+// 
+// Cos(0.9)
+// Math.cos  =  0.6216099682706644
+// My method =  0.595
+// 
+// -----------------------------------------------------
+// Sin(1.0)
+// Math.sin  =  0.8414709848078965
+// My method =  0.6666666666666667
+// 
+// Cos(1.0)
+// Math.cos  =  0.5403023058681398
+// My method =  0.5
+// 
+// -----------------------------------------------------
+// 
